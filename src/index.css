@@ -77,3 +77,12 @@
     @apply bg-white/80 backdrop-blur-lg border border-white/50 shadow-xl;
   }
 }
+
+@keyframes shimmer {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+html {
+  scroll-behavior: smooth;
+}

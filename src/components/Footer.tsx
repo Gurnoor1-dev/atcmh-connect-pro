@@ -1,28 +1,52 @@
+import { Plane } from "lucide-react";
+
+const links = [
+  { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
+  { label: "Eligibility", href: "#eligibility" },
+  { label: "Discord", href: "https://discord.gg/P3kcYbzTBU", external: true },
+];
+
 export default function Footer() {
   return (
-    <footer className="border-t border-border bg-card">
-      <div className="container mx-auto px-6 py-12">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-display font-bold text-xs">ATC</span>
-            </div>
-            <div>
-              <span className="font-display font-bold text-foreground">ATC Mentorship Hub</span>
-              <p className="text-xs text-muted-foreground">Your Gateway to IFATC</p>
+    <footer className="border-t border-border/50 bg-card/50 backdrop-blur-sm">
+      <div className="container mx-auto px-5 md:px-6 py-10 md:py-14">
+        <div className="flex flex-col gap-8">
+          {/* Top row */}
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+            <a href="#" className="flex items-center gap-2.5 group">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-md">
+                <Plane className="text-primary-foreground" size={16} />
+              </div>
+              <div>
+                <span className="font-display font-bold text-foreground text-sm">ATC Mentorship Hub</span>
+                <p className="text-[10px] text-muted-foreground">Your Gateway to IFATC</p>
+              </div>
+            </a>
+
+            <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+              {links.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noopener noreferrer" : undefined}
+                  className="text-muted-foreground hover:text-primary transition-colors duration-200"
+                >
+                  {link.label}
+                </a>
+              ))}
             </div>
           </div>
 
-          <div className="flex gap-6 text-sm">
-            <a href="#about" className="text-muted-foreground hover:text-primary transition-colors">About</a>
-            <a href="#services" className="text-muted-foreground hover:text-primary transition-colors">Services</a>
-            <a href="#eligibility" className="text-muted-foreground hover:text-primary transition-colors">Eligibility</a>
-            <a href="https://discord.gg/P3kcYbzTBU" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">Discord</a>
-          </div>
+          {/* Divider */}
+          <div className="h-px bg-border/50" />
 
-          <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} ATCMH. Not affiliated with IFATC.
-          </p>
+          {/* Bottom row */}
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-muted-foreground">
+            <p>© {new Date().getFullYear()} ATC Mentorship Hub. All rights reserved.</p>
+            <p>Not directly affiliated with the IFATC Recruitment Process.</p>
+          </div>
         </div>
       </div>
     </footer>
