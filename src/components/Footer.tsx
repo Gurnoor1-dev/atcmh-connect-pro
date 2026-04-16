@@ -1,4 +1,5 @@
-import { Plane } from "lucide-react";
+import { Plane } from "lucide-react"; // You can remove Plane from here if not used elsewhere
+import logoImg from "../assets/logo.png"; // Adjust the path based on your folder structure
 
 const links = [
   { label: "About", href: "#about" },
@@ -15,9 +16,15 @@ export default function Footer() {
           {/* Top row */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
             <a href="#" className="flex items-center gap-2.5 group">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-md">
-                <Plane className="text-primary-foreground" size={16} />
+              {/* LOGO INTEGRATED HERE */}
+              <div className="w-9 h-9 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                <img 
+                  src={logoImg} 
+                  alt="ATCMH Logo" 
+                  className="w-full h-full object-contain"
+                />
               </div>
+              
               <div>
                 <span className="font-display font-bold text-foreground text-sm">ATC Mentorship Hub</span>
                 <p className="text-[10px] text-muted-foreground">Your Gateway to IFATC</p>
