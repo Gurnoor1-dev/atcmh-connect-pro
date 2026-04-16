@@ -3,14 +3,19 @@ import { useRef } from "react";
 import { CheckCircle2, AlertTriangle, Shield, Sparkles } from "lucide-react";
 
 const requirements = [
-  "Must be an active Infinite Flight user",
-  "Must have Grade 2 or higher",
-  "Must join our Discord server to enroll",
-  "Must be willing to learn and commit time",
-  "No prior ATC experience required",
+  "Trust Level 1 on IFC",
+  "At least 14 years of age",
+  "Grade 3 with Expert Server access",
+  "Minimum of 500 ATC operations",
+  "Current IFATC recruit",
+  "All-time stats do not exceed 50% Level 1 Violation to landing ratio",
+  "At least 60 days since last Level 2 or 3 Violation",
+  "Must be able to access Discord",
 ];
 
 const notes = [
+  "Must have an active IFC account that is in good standing",
+  "Must not be listed on the IFVARB Blacklist or Watchlist",
   "We are not directly affiliated with the IFATC Recruitment Process",
   "Completion of our program does not guarantee IFATC acceptance",
 ];
