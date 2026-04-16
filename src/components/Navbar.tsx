@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Plane } from "lucide-react";
+import { Menu, X } from "lucide-react"; // Removed Plane since we're using the logo
+import logoImg from "../assets/logo.png"; // Import your logo here
 
 const navItems = [
   { label: "About", href: "#about" },
@@ -45,11 +46,15 @@ export default function Navbar() {
       <div className="container mx-auto flex items-center justify-between px-4 md:px-6">
         {/* Logo area */}
         <a href="#" className="flex items-center gap-2.5 group">
-          {/* Replace this div with your actual logo image: <img src="/logo.png" alt="ATCMH" className="w-10 h-10" /> */}
-          <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/20 group-hover:shadow-primary/40 transition-shadow overflow-hidden">
-            <Plane className="text-primary-foreground relative z-10" size={20} />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/0 to-primary-foreground/10 group-hover:to-primary-foreground/20 transition-colors" />
+          {/* LOGO INTEGRATED HERE */}
+          <div className="relative w-10 h-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+            <img 
+              src={logoImg} 
+              alt="ATCMH Logo" 
+              className="w-full h-full object-contain" 
+            />
           </div>
+          
           <div className="hidden sm:block">
             <span className={`font-display font-bold text-base leading-tight block transition-colors ${scrolled ? "text-foreground" : "text-navy-foreground"}`}>
               ATCMH
