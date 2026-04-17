@@ -4,10 +4,10 @@ import aboutBg from "@/assets/about-bg.jpg";
 import { TrendingUp, Users, Clock, Award } from "lucide-react";
 
 const stats = [
-  { icon: Users, value: "100+", label: "Controllers Mentored", color: "text-primary" },
+  { icon: Award, value: "150+", label: "Graduates", color: "text-primary" },
   { icon: TrendingUp, value: "95%", label: "Pass Rate", color: "text-accent" },
-  { icon: Clock, value: "24/7", label: "Discord Support", color: "text-gold" },
-  { icon: Award, value: "3", label: "Expert Programs", color: "text-primary" },
+  { icon: Clock, value: "24/7", label: "Global Coverage", color: "text-gold" },
+  { icon: Users, value: "3", label: "Mentorship Options", color: "text-primary" },
 ];
 
 export default function About() {
