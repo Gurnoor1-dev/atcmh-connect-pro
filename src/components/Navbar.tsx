@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion"; // Added missing imports
+import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "@/components/ThemeProvider";
 import { Menu, X, Moon, Sun } from "lucide-react";
-import logoLight from "../assets/logoLight.png"; 
-import logoDark from "../assets/logoDark.png"; 
+import logoLight from "../assets/logoLight.png";
+import logoDark from "../assets/logoDark.png";
 
 const navItems = [
   { label: "About", href: "#about" },
@@ -16,14 +16,21 @@ const navItems = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const { theme, setTheme } = useTheme(); // Added setTheme for the toggle
-  const isDark = theme === "dark";
+  const { theme, setTheme } = useTheme();
+
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" &&
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const toggleTheme = () => setTheme(isDark ? "light" : "dark");
 
   return (
     <nav
@@ -46,7 +53,7 @@ export default function Navbar() {
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-6">
           {navItems.map((item) => (
-            <a
+            
               key={item.label}
               href={item.href}
               target={item.external ? "_blank" : undefined}
@@ -57,15 +64,15 @@ export default function Navbar() {
             </a>
           ))}
 
-          {/* Simple Theme Toggle */}
           <button
-            onClick={() => setTheme(isDark ? "light" : "dark")}
+            onClick={toggleTheme}
             className="p-2 rounded-full hover:bg-muted transition-colors"
+            aria-label="Toggle theme"
           >
             {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
-          <a
+          
             href="https://discord.gg/P3kcYbzTBU"
             target="_blank"
             rel="noopener noreferrer"
@@ -75,13 +82,14 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile hamburger - FIXED TAGS HERE */}
+        {/* Mobile hamburger */}
         <button
           className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground"
           onClick={() => setOpen(!open)}
+          aria-label="Toggle menu"
         >
           {open ? <X size={22} /> : <Menu size={22} />}
-        </button> 
+        </button>
       </div>
 
       {/* Mobile menu */}
@@ -96,7 +104,7 @@ export default function Navbar() {
           >
             <div className="container mx-auto px-6 py-4 flex flex-col gap-4">
               {navItems.map((item) => (
-                <a
+                
                   key={item.label}
                   href={item.href}
                   target={item.external ? "_blank" : undefined}
@@ -109,12 +117,13 @@ export default function Navbar() {
               ))}
               <div className="flex items-center justify-between pt-2 border-t border-border">
                 <button
-                  onClick={() => setTheme(isDark ? "light" : "dark")}
+                  onClick={toggleTheme}
                   className="p-2 rounded-full hover:bg-muted transition-colors"
+                  aria-label="Toggle theme"
                 >
                   {isDark ? <Sun size={18} /> : <Moon size={18} />}
                 </button>
-                <a
+                
                   href="https://discord.gg/P3kcYbzTBU"
                   target="_blank"
                   rel="noopener noreferrer"
