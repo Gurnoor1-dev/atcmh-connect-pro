@@ -1,6 +1,7 @@
 // src/components/Navbar.tsx
 import { useState, useEffect } from "react"; // Add this line
 import { useTheme } from "@/components/ThemeProvider";
+import { Menu, X, Moon, Sun } from "lucide-react";
 import logoLight from "../assets/logoLight.png"; 
 import logoDark from "../assets/logoDark.png"; 
 
