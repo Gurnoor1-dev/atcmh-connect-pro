@@ -35,6 +35,19 @@ export default function Navbar() {
 
   const toggleTheme = () => setTheme(isDark ? "light" : "dark");
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith("#")) return;
+    e.preventDefault();
+    setOpen(false);
+    const id = href.slice(1);
+    const el = document.getElementById(id || "root"); // Fallback for '#'
+    if (el) {
+      const navbarHeight = 80;
+      const top = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -44,7 +57,12 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-6">
-        <a href="#" className="flex items-center gap-2">
+        {/* Logo */}
+        <a
+          href="#"
+          onClick={(e) => handleNavClick(e, "#")}
+          className="flex items-center gap-2"
+        >
           <img
             src={scrolled && !isDark ? logoDark : logoLight}
             alt="ATCMH"
@@ -55,11 +73,12 @@ export default function Navbar() {
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-6">
           {navItems.map((item) => (
-            <a // Added missing tag name
+            <a
               key={item.label}
               href={item.href}
               target={item.external ? "_blank" : undefined}
               rel={item.external ? "noopener noreferrer" : undefined}
+              onClick={(e) => handleNavClick(e, item.href)}
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
             >
               {item.label}
@@ -74,7 +93,7 @@ export default function Navbar() {
             {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
-          <a // Added missing tag name
+          <a
             href="https://discord.gg/P3kcYbzTBU"
             target="_blank"
             rel="noopener noreferrer"
@@ -84,6 +103,7 @@ export default function Navbar() {
           </a>
         </div>
 
+        {/* Mobile hamburger */}
         <button
           className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground"
           onClick={() => setOpen(!open)}
@@ -105,12 +125,12 @@ export default function Navbar() {
           >
             <div className="container mx-auto px-6 py-4 flex flex-col gap-4">
               {navItems.map((item) => (
-                <a // Added missing tag name
+                <a
                   key={item.label}
                   href={item.href}
                   target={item.external ? "_blank" : undefined}
                   rel={item.external ? "noopener noreferrer" : undefined}
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => handleNavClick(e, item.href)}
                   className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-1"
                 >
                   {item.label}
@@ -124,7 +144,7 @@ export default function Navbar() {
                 >
                   {isDark ? <Sun size={18} /> : <Moon size={18} />}
                 </button>
-                <a // Added missing tag name
+                <a
                   href="https://discord.gg/P3kcYbzTBU"
                   target="_blank"
                   rel="noopener noreferrer"
