@@ -70,8 +70,7 @@ export default function Navbar() {
           className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground"
           onClick={() => setOpen(!open)}
         >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+          {open ? <X size={22} />
       </div>
 
       {/* Mobile menu */}
