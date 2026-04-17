@@ -1,6 +1,6 @@
 import { Plane } from "lucide-react"; 
 import logoImg from "../assets/logo.png"; 
-import vaLogo from "../assets/vacompany-logo.svg"; // New Logo Import
+import vaLogo from "../assets/vacompany-logo.svg";
 
 const links = [
   { label: "About", href: "#about" },
@@ -49,16 +49,13 @@ export default function Footer() {
           {/* Divider */}
           <div className="h-px bg-border/50" />
 
-          {/* VACompany Logo Section */}
-          <div className="flex flex-col items-center sm:items-start gap-2">
-            <span className="text-[10px] uppercase tracking-widest text-muted-foreground/60 font-semibold">
-              Powered By
-            </span>
-            <div className="h-8 group">
+          {/* VACompany Logo - Theme Adaptive */}
+          <div className="flex justify-center sm:justify-start">
+            <div className="h-12 group transition-transform duration-300 hover:scale-105">
               <img 
                 src={vaLogo} 
                 alt="VACompany Logo" 
-                className="h-full w-auto object-contain transition-all duration-300 opacity-80 group-hover:opacity-100 invert dark:invert-0"
+                className="h-full w-auto object-contain invert dark:invert-0 opacity-90 group-hover:opacity-100"
               />
             </div>
           </div>
