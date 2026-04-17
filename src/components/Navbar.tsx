@@ -17,12 +17,15 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+  const [isDark, setIsDark] = useState(true);
 
-  const isDark =
-    theme === "dark" ||
-    (theme === "system" &&
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches);
+  useEffect(() => {
+    if (theme === "system") {
+      setIsDark(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    } else {
+      setIsDark(theme === "dark");
+    }
+  }, [theme]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -41,7 +44,6 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-6">
-        {/* Logo */}
         <a href="#" className="flex items-center gap-2">
           <img
             src={scrolled && !isDark ? logoDark : logoLight}
@@ -50,10 +52,9 @@ export default function Navbar() {
           />
         </a>
 
-        {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-6">
           {navItems.map((item) => (
-            <a
+            
               key={item.label}
               href={item.href}
               target={item.external ? "_blank" : undefined}
@@ -72,7 +73,7 @@ export default function Navbar() {
             {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
-          <a
+          
             href="https://discord.gg/P3kcYbzTBU"
             target="_blank"
             rel="noopener noreferrer"
@@ -82,7 +83,6 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile hamburger */}
         <button
           className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground"
           onClick={() => setOpen(!open)}
@@ -92,7 +92,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -104,7 +103,7 @@ export default function Navbar() {
           >
             <div className="container mx-auto px-6 py-4 flex flex-col gap-4">
               {navItems.map((item) => (
-                <a
+                
                   key={item.label}
                   href={item.href}
                   target={item.external ? "_blank" : undefined}
@@ -123,7 +122,7 @@ export default function Navbar() {
                 >
                   {isDark ? <Sun size={18} /> : <Moon size={18} />}
                 </button>
-                <a
+                
                   href="https://discord.gg/P3kcYbzTBU"
                   target="_blank"
                   rel="noopener noreferrer"
