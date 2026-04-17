@@ -52,6 +52,49 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 100% 50%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 217 32% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 32% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 210 100% 50%;
+    --accent-foreground: 210 40% 98%;
+
+    --border: 217 32% 17%;
+    --input: 217 32% 17%;
+    --ring: 224 76% 48%;
+
+    --sky-start: 222 47% 8%;
+    --sky-end: 222 47% 12%;
+    --navy: 222 47% 5%;
+    --navy-foreground: 210 40% 98%;
+    --gold: 45 93% 47%;
+    --gold-foreground: 210 40% 98%;
+    
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
 }
 
 @layer base {
@@ -59,7 +102,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-body antialiased;
+    @apply bg-background text-foreground font-body antialiased transition-colors duration-300;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
@@ -70,11 +113,18 @@
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
   }
+  
+  /* Modern Glassmorphism that adapts to Dark Mode */
   .glass {
-    @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-lg;
+    @apply bg-white/70 dark:bg-black/40 backdrop-blur-xl border border-white/40 dark:border-white/10 shadow-lg;
   }
+  
   .glass-card {
-    @apply bg-white/80 backdrop-blur-lg border border-white/50 shadow-xl;
+    @apply bg-white/80 dark:bg-black/50 backdrop-blur-lg border border-white/50 dark:border-white/20 shadow-xl;
+  }
+
+  .nav-blur {
+    @apply fixed top-0 w-full z-[100] bg-background/60 dark:bg-background/60 backdrop-blur-md border-b border-border;
   }
 }
 
