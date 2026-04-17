@@ -1,5 +1,6 @@
-import { Plane } from "lucide-react"; // You can remove Plane from here if not used elsewhere
-import logoImg from "../assets/logo.png"; // Adjust the path based on your folder structure
+import { Plane } from "lucide-react"; 
+import logoImg from "../assets/logo.png"; 
+import vaLogo from "../assets/vacompany-logo.svg"; // New Logo Import
 
 const links = [
   { label: "About", href: "#about" },
@@ -16,7 +17,6 @@ export default function Footer() {
           {/* Top row */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
             <a href="#" className="flex items-center gap-2.5 group">
-              {/* LOGO INTEGRATED HERE */}
               <div className="w-9 h-9 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                 <img 
                   src={logoImg} 
@@ -48,6 +48,20 @@ export default function Footer() {
 
           {/* Divider */}
           <div className="h-px bg-border/50" />
+
+          {/* VACompany Logo Section */}
+          <div className="flex flex-col items-center sm:items-start gap-2">
+            <span className="text-[10px] uppercase tracking-widest text-muted-foreground/60 font-semibold">
+              Powered By
+            </span>
+            <div className="h-8 group">
+              <img 
+                src={vaLogo} 
+                alt="VACompany Logo" 
+                className="h-full w-auto object-contain transition-all duration-300 opacity-80 group-hover:opacity-100 invert dark:invert-0"
+              />
+            </div>
+          </div>
 
           {/* Bottom row */}
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-muted-foreground">
