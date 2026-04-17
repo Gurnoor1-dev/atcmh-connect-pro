@@ -1,63 +1,4 @@
 // src/components/Navbar.tsx
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Moon, Sun } from "lucide-react";
-import { useTheme } from "@/components/ThemeProvider";
-import logoLight from "../assets/logoLight.png";
-import logoDark from "../assets/logoDark.png";
-
-const navItems = [
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Eligibility", href: "#eligibility" },
-  { label: "Exam Center", href: "https://exams.atcmh.org/", external: true },
-  { label: "Contact", href: "mailto:admin@atcmh.org", external: true },
-];
-
-// ── Polaris-style pill toggle ──────────────────────────────────────────
-function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
-  const isDark = theme === "dark";
-
-  return (
-    <div className="relative inline-flex items-center rounded-full p-[3px] gap-0.5 bg-white/[0.06] border border-white/[0.08] backdrop-blur-md">
-      {/* Sliding indicator */}
-      <motion.div
-        layout
-        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-        className={`absolute top-[3px] bottom-[3px] w-[34px] rounded-full shadow-lg ${
-          isDark
-            ? "left-[3px] bg-primary shadow-primary/30"
-            : "left-[calc(100%-37px)] bg-amber-400 shadow-amber-400/30"
-        }`}
-      />
-
-      {/* Dark button */}
-      <button
-        onClick={() => setTheme("dark")}
-        title="Dark mode"
-        className={`relative z-10 w-[34px] h-[34px] flex items-center justify-center rounded-full transition-colors duration-200 ${
-          isDark ? "text-white" : "text-muted-foreground hover:text-foreground"
-        }`}
-      >
-        <Moon size={15} />
-      </button>
-
-      {/* Light button */}
-      <button
-        onClick={() => setTheme("light")}
-        title="Light mode"
-        className={`relative z-10 w-[34px] h-[34px] flex items-center justify-center rounded-full transition-colors duration-200 ${
-          !isDark ? "text-white" : "text-muted-foreground hover:text-foreground"
-        }`}
-      >
-        <Sun size={15} />
-      </button>
-    </div>
-  );
-}
-
-// ── Navbar ─────────────────────────────────────────────────────────────
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -91,7 +32,7 @@ export default function Navbar() {
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-6">
           {navItems.map((item) => (
-            
+            <a
               key={item.label}
               href={item.href}
               target={item.external ? "_blank" : undefined}
@@ -104,7 +45,7 @@ export default function Navbar() {
 
           <ThemeToggle />
 
-          
+          <a
             href="https://discord.gg/P3kcYbzTBU"
             target="_blank"
             rel="noopener noreferrer"
@@ -135,7 +76,7 @@ export default function Navbar() {
           >
             <div className="container mx-auto px-6 py-4 flex flex-col gap-4">
               {navItems.map((item) => (
-                
+                <a
                   key={item.label}
                   href={item.href}
                   target={item.external ? "_blank" : undefined}
@@ -148,7 +89,7 @@ export default function Navbar() {
               ))}
               <div className="flex items-center justify-between pt-2 border-t border-border">
                 <ThemeToggle />
-                
+                <a
                   href="https://discord.gg/P3kcYbzTBU"
                   target="_blank"
                   rel="noopener noreferrer"
