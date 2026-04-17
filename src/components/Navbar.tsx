@@ -1,6 +1,9 @@
 // src/components/Navbar.tsx
 import { useState, useEffect } from "react"; // Add this line
 import { useTheme } from "@/components/ThemeProvider";
+import logoLight from "../assets/logoLight.png"; 
+import logoDark from "../assets/logoDark.png"; 
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
