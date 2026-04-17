@@ -9,6 +9,13 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { theme } = useTheme();
   const isDark = theme === "dark";
+  const navItems = [
+  { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
+  { label: "Eligibility", href: "#eligibility" },
+  { label: "Exam Center", href: "https://exams.atcmh.org/", external: true },
+  { label: "Contact", href: "mailto:admin@atcmh.org", external: true }, // Simple mailto for now
+];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
