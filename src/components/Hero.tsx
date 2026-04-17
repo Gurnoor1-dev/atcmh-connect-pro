@@ -1,4 +1,6 @@
 // src/components/Hero.tsx
+import heroBg from "../assets/hero-bg.jpg"; // Or whatever your background file is named
+
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-5">
