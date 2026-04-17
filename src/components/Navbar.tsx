@@ -2,8 +2,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon, Mail } from "lucide-react";
-import logoLight from "../assets/logo-light.png"; // Use the one with light text for dark bg
-import logoDark from "../assets/logo-dark.png";   // Use the one with dark text for light bg
+import logoLight from "../assets/logoLight.png"; // Use the one with light text for dark bg
+import logoDark from "../assets/logoDark.png";   // Use the one with dark text for light bg
 
 const navItems = [
   { label: "About", href: "#about" },
