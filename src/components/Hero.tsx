@@ -1,43 +1,88 @@
 // src/components/Hero.tsx
-import { useState, useEffect } from "react"; // Add this line
 import { motion } from "framer-motion";
-import { ChevronDown, ArrowRight } from "lucide-react"; // Add ChevronDown here
-import heroBg from "../assets/hero-bg.jpg"; // Or whatever your background file is named
+import { ChevronDown, ArrowRight } from "lucide-react";
+import heroBg from "../assets/hero-bg.jpg";
 
 export default function Hero() {
+  const scrollToAbout = () => {
+    const aboutSection = document.getElementById("about");
+    if (aboutSection) {
+      const offset = 80; // Navbar height
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = aboutSection.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-5">
-      {/* Background - Suggest using a less busy image or higher blur */}
-      <div className="absolute inset-0 z-[-1]">
-        <img src={heroBg} className="w-full h-full object-cover blur-[2px] opacity-40" />
-        <div className="absolute inset-0 bg-background/60" />
+    <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center text-center px-5 pt-20">
+      {/* Background */}
+      <div className="absolute inset-0 z-[-1] overflow-hidden">
+        <img 
+          src={heroBg} 
+          className="w-full h-full object-cover blur-[2px] opacity-40 scale-105" 
+          alt="Background"
+        />
+        <div className="absolute inset-0 bg-background/60 backdrop-blur-[1px]" />
       </div>
 
-      <h1 className="text-5xl md:text-7xl font-bold mb-6">
-        Control the <span className="text-primary">Expert Server</span> Skies
-      </h1>
-      
-      {/* ... Buttons ... */}
+      {/* Main Content */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="max-w-4xl mx-auto"
+      >
+        <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 tracking-tight">
+          Control the <span className="text-primary">Expert Server</span> Skies
+        </h1>
+        <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto mb-10">
+          Professional mentorship for aspiring Infinite Flight Air Traffic Controllers.
+        </p>
 
-      {/* Centered Stats at bottom */}
-      <div className="mt-20 grid grid-cols-3 gap-12 border-t border-border/50 pt-10 w-full max-w-2xl">
-        <div>
-          <p className="text-3xl font-bold">700+</p>
-          <p className="text-xs uppercase text-muted-foreground">Members</p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button 
+             onClick={scrollToAbout}
+             className="px-8 py-4 bg-primary text-primary-foreground rounded-xl font-bold flex items-center gap-2 hover:scale-105 transition-transform"
+          >
+            Get Started <ArrowRight size={18} />
+          </button>
         </div>
-        <div>
-          <p className="text-3xl font-bold">150+</p>
-          <p className="text-xs uppercase text-muted-foreground">Graduates</p>
+      </motion.div>
+
+      {/* Centered Stats */}
+      <div className="mt-20 grid grid-cols-3 gap-8 md:gap-12 border-t border-border/50 pt-10 w-full max-w-2xl">
+        <div className="flex flex-col items-center">
+          <p className="text-2xl md:text-3xl font-bold">700+</p>
+          <p className="text-[10px] md:text-xs uppercase tracking-widest text-muted-foreground">Members</p>
         </div>
-        <div>
-          <p className="text-3xl font-bold text-primary">FREE</p>
-          <p className="text-xs uppercase text-muted-foreground">Services</p>
+        <div className="flex flex-col items-center border-x border-border/50">
+          <p className="text-2xl md:text-3xl font-bold">150+</p>
+          <p className="text-[10px] md:text-xs uppercase tracking-widest text-muted-foreground">Graduates</p>
+        </div>
+        <div className="flex flex-col items-center">
+          <p className="text-2xl md:text-3xl font-bold text-primary">FREE</p>
+          <p className="text-[10px] md:text-xs uppercase tracking-widest text-muted-foreground">Services</p>
         </div>
       </div>
 
-      {/* Centered Scroll Indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-        <ChevronDown className="text-muted-foreground" />
+      {/* PROPERLY CENTERED Scroll Indicator */}
+      <div className="absolute bottom-10 inset-x-0 flex justify-center">
+        <motion.button
+          onClick={scrollToAbout}
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5 }}
+          className="p-2 text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+          aria-label="Scroll to About"
+        >
+          <ChevronDown size={32} strokeWidth={1.5} />
+        </motion.button>
       </div>
     </section>
   );
