@@ -1,4 +1,5 @@
 // src/components/Navbar.tsx
+import { useState, useEffect } from "react"; // Add this line
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
