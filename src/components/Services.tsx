@@ -5,9 +5,9 @@ import { Headphones, BookOpen, Target, ArrowUpRight } from "lucide-react";
 const services = [
   {
     icon: Headphones,
-    title: "Mentor Sessions",
+    title: "Full Mentorship",
     description:
-      "Request a Mentor who will show you everything from applying knowledge to advanced controlling techniques, specifically preparing you for the practical exam.",
+    "A structured instructional program emphasizing the theoretical knowledge and conceptual understanding necessary for successful completion of the IFATC written examination.",
     gradient: "from-primary to-accent",
     bg: "bg-primary/5",
     tag: "Most Popular",
@@ -15,9 +15,9 @@ const services = [
   },
   {
     icon: BookOpen,
-    title: "Written Exam Help",
+    title: "Written Exam Prep",
     description:
-      "Struggling with understanding questions on the written exam? A Mentor will guide you through them while giving you clear explanations to ensure full understanding.",
+    "Struggling with understanding questions on the written exam? A Mentor will guide you through them while giving you clear explanations to ensure full understanding.",
     gradient: "from-accent to-primary",
     bg: "bg-accent/5",
     tag: "Knowledge",
@@ -27,7 +27,7 @@ const services = [
     icon: Target,
     title: "Mock Practical",
     description:
-      "Ready for the practical exam but want one last check? Mock Practicals mirror the real exam to ensure you have a solid understanding of all applicable skills.",
+    "A simulated practical examination conducted to evaluate performance, identify improvement areas, and prepare candidates for the IFATC practical. This is only recommended for returning members.",
     gradient: "from-gold to-primary",
     bg: "bg-gold/5",
     tag: "Final Prep",
