@@ -1,22 +1,23 @@
-// src/components/Navbar.tsx
-import { useState, useEffect } from "react"; // Add this line
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion"; // Added missing imports
 import { useTheme } from "@/components/ThemeProvider";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import logoLight from "../assets/logoLight.png"; 
 import logoDark from "../assets/logoDark.png"; 
 
-export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-  const navItems = [
+const navItems = [
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
   { label: "Eligibility", href: "#eligibility" },
   { label: "Exam Center", href: "https://exams.atcmh.org/", external: true },
-  { label: "Contact", href: "mailto:admin@atcmh.org", external: true }, // Simple mailto for now
+  { label: "Contact", href: "mailto:admin@atcmh.org", external: true },
 ];
+
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const { theme, setTheme } = useTheme(); // Added setTheme for the toggle
+  const isDark = theme === "dark";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -56,6 +57,14 @@ export default function Navbar() {
             </a>
           ))}
 
+          {/* Simple Theme Toggle */}
+          <button
+            onClick={() => setTheme(isDark ? "light" : "dark")}
+            className="p-2 rounded-full hover:bg-muted transition-colors"
+          >
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+
           <a
             href="https://discord.gg/P3kcYbzTBU"
             target="_blank"
@@ -66,12 +75,13 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile hamburger */}
+        {/* Mobile hamburger - FIXED TAGS HERE */}
         <button
           className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground"
           onClick={() => setOpen(!open)}
         >
           {open ? <X size={22} /> : <Menu size={22} />}
+        </button> 
       </div>
 
       {/* Mobile menu */}
@@ -98,7 +108,12 @@ export default function Navbar() {
                 </a>
               ))}
               <div className="flex items-center justify-between pt-2 border-t border-border">
-                
+                <button
+                  onClick={() => setTheme(isDark ? "light" : "dark")}
+                  className="p-2 rounded-full hover:bg-muted transition-colors"
+                >
+                  {isDark ? <Sun size={18} /> : <Moon size={18} />}
+                </button>
                 <a
                   href="https://discord.gg/P3kcYbzTBU"
                   target="_blank"
