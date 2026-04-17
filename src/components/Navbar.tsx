@@ -55,8 +55,6 @@ export default function Navbar() {
             </a>
           ))}
 
-          <ThemeToggle />
-
           <a
             href="https://discord.gg/P3kcYbzTBU"
             target="_blank"
@@ -100,7 +98,7 @@ export default function Navbar() {
                 </a>
               ))}
               <div className="flex items-center justify-between pt-2 border-t border-border">
-                <ThemeToggle />
+                
                 <a
                   href="https://discord.gg/P3kcYbzTBU"
                   target="_blank"
