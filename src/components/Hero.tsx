@@ -1,4 +1,5 @@
 // src/components/Hero.tsx
+import { useState, useEffect } from "react"; // Add this line
 import { motion } from "framer-motion";
 import { ChevronDown, ArrowRight } from "lucide-react"; // Add ChevronDown here
 import heroBg from "../assets/hero-bg.jpg"; // Or whatever your background file is named
