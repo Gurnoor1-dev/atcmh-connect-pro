@@ -68,8 +68,8 @@ export default function About() {
                   <Award className="text-primary" size={20} />
                 </div>
                 <div>
-                  <p className="text-2xl font-display font-bold text-foreground">100+</p>
-                  <p className="text-xs text-muted-foreground">Controllers Mentored</p>
+                  <p className="text-2xl font-display font-bold text-foreground">150+</p>
+                  <p className="text-xs text-muted-foreground">Graduates with 95% Success Rate.</p>
                 </div>
               </div>
             </motion.div>
