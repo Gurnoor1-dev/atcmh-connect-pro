@@ -52,9 +52,10 @@ export default function Navbar() {
           />
         </a>
 
+        {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-6">
           {navItems.map((item) => (
-            
+            <a // Added missing tag name
               key={item.label}
               href={item.href}
               target={item.external ? "_blank" : undefined}
@@ -73,7 +74,7 @@ export default function Navbar() {
             {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
-          
+          <a // Added missing tag name
             href="https://discord.gg/P3kcYbzTBU"
             target="_blank"
             rel="noopener noreferrer"
@@ -92,6 +93,7 @@ export default function Navbar() {
         </button>
       </div>
 
+      {/* Mobile menu */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -103,7 +105,7 @@ export default function Navbar() {
           >
             <div className="container mx-auto px-6 py-4 flex flex-col gap-4">
               {navItems.map((item) => (
-                
+                <a // Added missing tag name
                   key={item.label}
                   href={item.href}
                   target={item.external ? "_blank" : undefined}
@@ -122,7 +124,7 @@ export default function Navbar() {
                 >
                   {isDark ? <Sun size={18} /> : <Moon size={18} />}
                 </button>
-                
+                <a // Added missing tag name
                   href="https://discord.gg/P3kcYbzTBU"
                   target="_blank"
                   rel="noopener noreferrer"
