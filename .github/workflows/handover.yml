@@ -1,0 +1,29 @@
+name: Handover
+on: [workflow_dispatch] 
+jobs:
+  copy-to-new-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Push to Client Repo
+        run: |
+          # Remove the old history
+          rm -rf .git
+          
+          # Initialize as a brand new repo
+          git init
+          git config user.name "Gurnoor1-dev"
+          git config user.email "gurnoor@example.com"
+          
+          # Stage all project files
+          git add .
+          
+          # Create the single "Initial" commit
+          git commit -m "Initial production release"
+          
+          # Rename branch to main
+          git branch -M main
+          
+          # Push to the new destination using the secret token
+          git remote add origin https://github.com/Gurnoor1-dev/atcmh-website.git
+          git push -u --force https://${{ secrets.HANDOVER_TOKEN }}@github.com/Gurnoor1-dev/atcmh-website.git main
