@@ -10,7 +10,7 @@ const navItems = [
   { label: "Services", href: "#services" },
   { label: "Eligibility", href: "#eligibility" },
   { label: "Exam Center", href: "https://exams.atcmh.org/", external: true },
-  { label: "Contact", href: "mailto:admin@atcmh.org", external: true },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
