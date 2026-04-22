@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 import { Input } from "@/components/ui/input";
 
 export default function Contact() {
@@ -39,6 +41,9 @@ export default function Contact() {
       <div className="w-full max-w-2xl">
 
         {/* Title */}
+
+        <Navbar />
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -108,5 +113,6 @@ export default function Contact() {
         </motion.form>
       </div>
     </section>
+    <Footer />
   );
 }
