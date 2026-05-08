@@ -63,7 +63,7 @@ export default function Hero() {
           <p className="text-[10px] md:text-xs uppercase tracking-widest text-muted-foreground">Members</p>
         </div>
         <div className="flex flex-col items-center border-x border-border/50">
-          <p className="text-2xl md:text-3xl font-bold">150+</p>
+          <p className="text-2xl md:text-3xl font-bold">200+</p>
           <p className="text-[10px] md:text-xs uppercase tracking-widest text-muted-foreground">Graduates</p>
         </div>
         <div className="flex flex-col items-center">
