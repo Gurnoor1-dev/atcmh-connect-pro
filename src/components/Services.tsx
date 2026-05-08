@@ -7,7 +7,7 @@ const services = [
     icon: Headphones,
     title: "Full Mentorship",
     description:
-    "A structured instructional program emphasizing the theoretical knowledge and conceptual understanding necessary for successful completion of the IFATC written examination.",
+    "A structured program that combines theoretical knowledge with the practical controlling skills needed to successfully complete the written and practical exams. This pathway is designed to develop highly capable, quality controllers.",
     gradient: "from-primary to-accent",
     bg: "bg-primary/5",
     tag: "Most Popular",
@@ -28,8 +28,8 @@ const services = [
     title: "Mock Practical",
     description:
     "A simulated practical examination conducted to evaluate performance, identify improvement areas, and prepare candidates for the IFATC practical. This is only recommended for returning members.",
-    gradient: "from-gold to-primary",
-    bg: "bg-gold/5",
+    gradient: "from-primary to-accent",
+    bg: "bg-primary/5",
     tag: "Final Prep",
     num: "03",
   },
@@ -80,15 +80,9 @@ function ServiceCard({ service, index, inView }: { service: typeof services[0]; 
           {service.description}
         </p>
 
-        {/* Bottom bar */}
-        <div className="flex items-center justify-between">
+        {/* Bottom bar - accent line only, no learn more button */}
+        <div className="flex items-center">
           <div className={`h-1 rounded-full bg-gradient-to-r ${service.gradient} transition-all duration-500 ${hovered ? "w-16" : "w-10"}`} />
-          <motion.div
-            animate={{ x: hovered ? 0 : -5, opacity: hovered ? 1 : 0 }}
-            className="flex items-center gap-1 text-xs font-semibold text-primary"
-          >
-            Learn more <ArrowUpRight size={12} />
-          </motion.div>
         </div>
       </div>
     </motion.div>
