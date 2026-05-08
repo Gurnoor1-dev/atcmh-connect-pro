@@ -4,8 +4,8 @@ import aboutBg from "@/assets/about-bg.jpg";
 import { TrendingUp, Users, Clock, Award } from "lucide-react";
 
 const stats = [
-  { icon: Award, value: "150+", label: "Graduates", color: "text-primary" },
-  { icon: TrendingUp, value: "95%", label: "Pass Rate", color: "text-accent" },
+  { icon: Award, value: "200+", label: "Graduates", color: "text-primary" },
+  { icon: TrendingUp, value: "IFVARB", label: "Approved", color: "text-accent" },
   { icon: Clock, value: "24/7", label: "Global Coverage", color: "text-gold" },
   { icon: Users, value: "3", label: "Mentorship Options", color: "text-primary" },
 ];
@@ -68,8 +68,8 @@ export default function About() {
                   <Award className="text-primary" size={20} />
                 </div>
                 <div>
-                  <p className="text-2xl font-display font-bold text-foreground">150+</p>
-                  <p className="text-xs text-muted-foreground">Graduates with 95% Success Rate.</p>
+                  <p className="text-2xl font-display font-bold text-foreground">200+</p>
+                  <p className="text-xs text-muted-foreground">Graduates & IFVARB Approved.</p>
                 </div>
               </div>
             </motion.div>
