@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight, Sparkles } from "lucide-react";
+import ctaBg from "../assets/cta-bg.jpg";
 
 export default function CTA() {
   const ref = useRef(null);
@@ -15,15 +16,17 @@ export default function CTA() {
           transition={{ duration: 0.7 }}
           className="relative max-w-4xl mx-auto rounded-3xl overflow-hidden"
         >
-          {/* Background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-navy via-primary to-accent" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_50%,rgba(255,255,255,0.12),transparent_60%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_80%,rgba(255,255,255,0.06),transparent_60%)]" />
-          {/* Grid pattern */}
-          <div className="absolute inset-0 opacity-[0.04]" style={{
-            backgroundImage: "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
-            backgroundSize: "40px 40px"
-          }} />
+          {/* Image Background */}
+          <img
+            src={ctaBg}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          {/* Dark overlay so text stays readable */}
+          <div className="absolute inset-0 bg-navy/70" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_50%,rgba(255,255,255,0.08),transparent_60%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_80%,rgba(255,255,255,0.04),transparent_60%)]" />
 
           <div className="relative px-6 py-14 sm:px-10 sm:py-16 md:px-16 md:py-20 text-center">
             <motion.div
