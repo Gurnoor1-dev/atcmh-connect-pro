@@ -37,12 +37,12 @@ export default function About() {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Image with overlay card */}
+          {/* Image only */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="relative group"
+            className="relative"
           >
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <motion.img
@@ -52,27 +52,12 @@ export default function About() {
                 width={1920}
                 height={880}
                 onLoad={() => setImgLoaded(true)}
-                className={`w-full h-64 sm:h-80 md:h-[400px] object-cover transition-all duration-700 group-hover:scale-105 ${imgLoaded ? "blur-0" : "blur-md"}`}
+                className={`w-full h-64 sm:h-80 md:h-[450px] object-cover transition-all duration-700 hover:scale-105 ${
+                  imgLoaded ? "blur-0" : "blur-md"
+                }`}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy/50 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
             </div>
-            {/* Floating card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.9 }}
-              animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="absolute -bottom-5 right-3 sm:right-6 glass-card rounded-2xl p-4 sm:p-5"
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Award className="text-primary" size={20} />
-                </div>
-                <div>
-                  <p className="text-2xl font-display font-bold text-foreground">200+</p>
-                  <p className="text-xs text-muted-foreground">Graduates & IFVARB Approved.</p>
-                </div>
-              </div>
-            </motion.div>
           </motion.div>
 
           {/* Text content */}
