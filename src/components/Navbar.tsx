@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react"; // Added useMemo
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "@/components/ThemeProvider";
 import { Menu, X, Moon, Sun } from "lucide-react";
-import { useLocation, useNavigate } from "react-router-dom"; // Add these imports
+import { useLocation, useNavigate } from "react-router-dom";
 import logoLight from "../assets/logoLight.png";
 import logoDark from "../assets/logoDark.png";
 
@@ -18,18 +18,29 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { theme, setTheme } = useTheme();
-  const [isDark, setIsDark] = useState(true);
   
-  const location = useLocation(); // Current path
-  const navigate = useNavigate(); // For redirecting
+  // Track system preference locally to force a re-render if system changes
+  const [systemTheme, setSystemTheme] = useState<"light" | "dark">(
+    window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+  );
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // 1. Sync with system theme changes
   useEffect(() => {
-    if (theme === "system") {
-      setIsDark(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    } else {
-      setIsDark(theme === "dark");
-    }
-  }, [theme]);
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = () => setSystemTheme(mediaQuery.matches ? "dark" : "light");
+    
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  // 2. Determine if the UI should show dark mode elements
+  const isDark = useMemo(() => {
+    if (theme === "system") return systemTheme === "dark";
+    return theme === "dark";
+  }, [theme, systemTheme]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -37,35 +48,29 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const toggleTheme = () => setTheme(isDark ? "light" : "dark");
+  // 3. Cycle through themes: Light -> Dark -> (Optional: System) 
+  // Most users prefer a binary toggle, but this ensures it updates the Provider
+  const toggleTheme = () => {
+    setTheme(isDark ? "light" : "dark");
+  };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    // 1. External links or full page routes (like /contact) function normally
-    if (href.startsWith("http") || href.startsWith("/") && !href.startsWith("/#")) return;
-
+    if (href.startsWith("http") || (href.startsWith("/") && !href.startsWith("/#"))) return;
     e.preventDefault();
     setOpen(false);
 
-    // 2. If we are NOT on the homepage and the link is an anchor (starts with #)
     if (location.pathname !== "/") {
-      // Redirect to home page with the hash
       navigate(`/${href}`);
       return;
     }
 
-    // 3. Normal smooth scroll logic if already on home page
     const id = href === "#" ? "root" : href.slice(1);
     const el = document.getElementById(id);
-
     if (el) {
       const navbarHeight = scrolled ? 70 : 90;
       const elementPosition = el.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
+      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
     }
   };
 
@@ -78,12 +83,8 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-6">
-        {/* Logo */}
-        <a
-          href="/"
-          onClick={(e) => handleNavClick(e, "#")}
-          className="flex items-center gap-2"
-        >
+        <a href="/" onClick={(e) => handleNavClick(e, "#")} className="flex items-center gap-2">
+          {/* Logo switches based on the calculated isDark state */}
           <img
             src={isDark ? logoLight : logoDark}
             alt="ATCMH"
@@ -91,7 +92,6 @@ export default function Navbar() {
           />
         </a>
 
-        {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-6">
           {navItems.map((item) => (
             <a
@@ -106,9 +106,10 @@ export default function Navbar() {
             </a>
           ))}
 
-          {/* Theme Toggle */}
+          {/* Theme Toggle Button */}
           <button
             onClick={toggleTheme}
+            aria-label="Toggle theme"
             className="p-2 rounded-full hover:bg-muted transition-colors flex items-center justify-center"
           >
             {isDark ? (
@@ -128,7 +129,6 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile hamburger */}
         <button
           className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground relative z-[110]"
           onClick={() => setOpen(!open)}
@@ -137,14 +137,13 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {open && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-x-0 top-0 pt-20 pb-8 bg-card border-b border-border shadow-2xl md:hidden z-[90]"
+            className="fixed inset-x-0 top-0 pt-24 pb-8 bg-card border-b border-border shadow-2xl md:hidden z-[90]"
           >
             <div className="container mx-auto px-6 flex flex-col gap-6">
               {navItems.map((item) => (
@@ -157,7 +156,24 @@ export default function Navbar() {
                   {item.label}
                 </a>
               ))}
-              {/* ... Rest of mobile menu (Theme Toggle/Enroll button) */}
+              
+              <div className="flex items-center justify-between pt-4 border-t border-border">
+                <span className="text-sm font-medium text-muted-foreground">Appearance</span>
+                <button
+                  onClick={toggleTheme}
+                  className="p-3 rounded-xl bg-muted flex items-center gap-3"
+                >
+                  {isDark ? <Sun size={20} className="text-yellow-400" /> : <Moon size={20} />}
+                  <span className="text-sm capitalize">{isDark ? "Light Mode" : "Dark Mode"}</span>
+                </button>
+              </div>
+
+              <a
+                href="https://discord.gg/P3kcYbzTBU"
+                className="w-full py-4 bg-primary text-primary-foreground text-center rounded-xl font-bold"
+              >
+                Enroll Now
+              </a>
             </div>
           </motion.div>
         )}
